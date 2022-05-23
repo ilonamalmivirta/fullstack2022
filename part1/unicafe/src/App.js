@@ -25,7 +25,7 @@ const StatisticLine = (props) => {
 }
 
 const Statistics = (props) => {
-  if (props.stats.all==0) {
+  if (props.stats.all===0) {
     return (
       <div>
         <p>No feecback given</p>
@@ -51,7 +51,6 @@ const Statistics = (props) => {
 const App = () => {
   const title1 = 'give feedback'
   const title2 = 'statistics'
-  // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
@@ -70,17 +69,14 @@ const App = () => {
   }
 
   const setToGood = newValue => {
-    console.log('value now', newValue)
     setGood(newValue)
   }
 
   const setToNeutral = newValue => {
-    console.log('value now', newValue)
     setNeutral(newValue)
   }
 
   const setToBad = newValue => {
-    console.log('value now', newValue)
     setBad(newValue)
   }
 
