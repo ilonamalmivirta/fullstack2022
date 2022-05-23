@@ -1,93 +1,66 @@
-import { useState } from 'react'
-
 const Header = (props) => {
   console.log(props)
   return (
       <h1>
-         {props.title}
+         {props.name}
       </h1>
   )
 }
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>
-    {props.text}
-  </button>
-)
-
-const StatisticLine = (props) => {
+const Part = (props) => {
   return (
-    <tr>
-      <td>{props.text}</td>
-      <td>{props.value}</td>
-    </tr>
+    <div>
+      <p>
+        {props.name} {props.exercises}
+      </p>
+    </div>
   )
 }
 
-const Statistics = (props) => {
-  if (props.stats.all===0) {
-    return (
-      <div>
-        <p>No feecback given</p>
-      </div>
-    )
-  }
-  else {
-    return (
-      <table>
-        <tbody> 
-          <StatisticLine text="good" value={props.stats.good} />
-          <StatisticLine text="neutral" value={props.stats.neutral} />
-          <StatisticLine text="bad" value={props.stats.bad} />
-          <StatisticLine text="all" value={props.stats.all} />
-          <StatisticLine text="average" value={props.stats.average} />
-          <StatisticLine text="positive" value={props.stats.positive} />
-        </tbody>
-      </table>
-    )
-  }
+const Content = (props) => {
+  return (
+    <div>
+      <Part name={props.parts[0].name} exercises={props.parts[0].exercises} />
+      <Part name={props.parts[1].name} exercises={props.parts[1].exercises} />
+      <Part name={props.parts[2].name} exercises={props.parts[2].exercises} />
+    </div>
+  )
+}
+
+const Total = (props) => {
+  return (
+    <div>
+      <p>
+        Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
+      </p>
+    </div>
+  )
 }
 
 const App = () => {
-  const title1 = 'give feedback'
-  const title2 = 'statistics'
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
-  const all = good+neutral+bad
-  const average = ((good-bad)/all)
-  const positive = ((good/all)*100) + '%'
-
-  const stats = {
-    good: good,
-    neutral: neutral,
-    bad: bad,
-    all: all,
-    average: average,
-    positive: positive,
-  }
-
-  const setToGood = newValue => {
-    setGood(newValue)
-  }
-
-  const setToNeutral = newValue => {
-    setNeutral(newValue)
-  }
-
-  const setToBad = newValue => {
-    setBad(newValue)
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
   }
 
   return (
     <div>
-      <Header title={title1} />
-      <Button handleClick={() => setToGood(good + 1)} text="good" />
-      <Button handleClick={() => setToNeutral(neutral + 1)} text="neutral" />
-      <Button handleClick={() => setToBad(bad + 1)} text="bad" />
-      <Header title={title2} />
-      <Statistics stats={stats} />
+      <Header name={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
