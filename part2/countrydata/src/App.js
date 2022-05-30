@@ -17,7 +17,6 @@ const Country = (props) => {
       });
   }, []);
 
- // REACT_APP_API_KEY=542f9c33733a0e52c9f8d72203af8167 npm start
   console.log({weather})
   return (
     <div>
